@@ -1,0 +1,536 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sobre de item de recolector",
+  "description": "Unidad de intercambio que emite un recolector. Cada linea de la salida JSONL debe validar de forma independiente contra este esquema. El sobre separa 'meta' (metadatos de captura, comunes a todas las fuentes) de 'data' (contenido tal y como lo publica la fuente). Un recolector normaliza formato, nunca vocabulario.",
+  "type": "object",
+  "required": ["meta", "data"],
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "title": "Metadatos de captura",
+      "description": "Cerrado a estos seis campos: cualquier otro dato producido por el recolector va dentro de 'data'.",
+      "required": [
+        "source",
+        "schema_version",
+        "scraper_version",
+        "external_id",
+        "url",
+        "scraped_at"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "type": "string",
+          "title": "Codigo estable de la fuente",
+          "description": "Identificador en snake_case de la fuente de datos. No cambia nunca una vez publicado.",
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "minLength": 2,
+          "maxLength": 64,
+          "examples": ["boe_subastas"]
+        },
+        "schema_version": {
+          "type": "integer",
+          "title": "Version del formato del sobre",
+          "description": "Version de la estructura del sobre y de la forma de 'data' para esta fuente. Se incrementa solo ante cambios incompatibles que obliguen a un parser distinto. Permite re-procesar capturas historicas con el parser correcto.",
+          "minimum": 1,
+          "examples": [1]
+        },
+        "scraper_version": {
+          "type": "string",
+          "title": "Version del recolector",
+          "description": "Version semantica del paquete que produjo el sobre. Identifica que capturas se hicieron con una version defectuosa del parser sin necesidad de repetir la captura.",
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$",
+          "examples": ["0.3.1", "1.0.0-rc.2"]
+        },
+        "external_id": {
+          "type": "string",
+          "title": "Identificador del item en la fuente",
+          "description": "Identifica el item dentro de su fuente de forma estable. Debe ser determinista: el mismo item produce el mismo valor en todas las ejecuciones. No son validos los valores derivados del reloj, de la posicion en la pagina o del orden de recorrido. Cuando un registro de la fuente contiene varias unidades independientes (los lotes de una subasta, por ejemplo), cada una es un sobre propio con su propio external_id.",
+          "minLength": 1,
+          "maxLength": 512,
+          "examples": ["SUB-JA-2026-123456/L1"]
+        },
+        "url": {
+          "type": ["string", "null"],
+          "title": "URL de la ficha en origen",
+          "description": "Direccion publica del item en la fuente. La clave esta siempre presente; el valor es null cuando la fuente no expone una URL estable por item.",
+          "format": "uri",
+          "pattern": "^https?://",
+          "maxLength": 2048
+        },
+        "scraped_at": {
+          "type": "string",
+          "title": "Momento de la captura",
+          "description": "Instante en que se capturo el item. ISO 8601 en UTC, terminado obligatoriamente en Z: no se admiten desfases horarios, para que capturas de fuentes distintas sean directamente comparables.",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$",
+          "examples": ["2026-08-22T03:14:07Z"]
+        }
+      }
+    },
+    "data": {
+      "type": "object",
+      "title": "Unidad subastada en el Portal de Subastas del BOE",
+      "description": "Cada sobre es una unidad que se vende: la subasta entera si no tiene lotes, o uno de sus lotes si los tiene (external_id con sufijo /L<n>). En los campos tipificados se normaliza el FORMATO (fechas en ISO 8601, importes de los campos económicos como número sin símbolo, la ausencia de dato como null) pero nunca el VOCABULARIO: los textos conservan los literales del portal, erratas incluidas. «No consta», «No disponible» y «-» del portal se emiten como null. Las filas no tipificadas (campos 'otros') se conservan con su etiqueta y su valor literales, sin normalizar.",
+      "required": [
+        "identificador_subasta",
+        "lote",
+        "descripcion",
+        "descripcion_anuncio",
+        "bienes",
+        "pujas",
+        "subasta"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "identificador_subasta": {
+          "type": "string",
+          "title": "Número de expediente de la subasta madre",
+          "description": "Relaciona este sobre con su subasta: todos los lotes de una misma subasta comparten este valor.",
+          "pattern": "^SUB-",
+          "examples": ["SUB-JA-2026-265000"]
+        },
+        "lote": {
+          "title": "Lote concreto de este sobre",
+          "description": "Cuando la subasta vende varias cosas por separado, aquí van el número y las condiciones económicas del lote de esta línea. Si la subasta se vende entera de una vez, es null y las condiciones están en 'subasta'.",
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "required": [
+                "numero",
+                "cantidad_reclamada",
+                "valor_subasta",
+                "tasacion",
+                "puja_minima",
+                "tramos_pujas",
+                "importe_deposito",
+                "otros"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "numero": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "description": "Qué lote es dentro de la subasta (1, 2, 3…)."
+                },
+                "cantidad_reclamada": {
+                  "$ref": "#/$defs/importe_o_literal",
+                  "description": "Parte de la deuda que se intenta cobrar con este lote."
+                },
+                "valor_subasta": {
+                  "$ref": "#/$defs/importe_o_literal",
+                  "description": "Precio de referencia con el que el lote sale a la venta."
+                },
+                "tasacion": {
+                  "$ref": "#/$defs/importe_o_literal",
+                  "description": "Lo que un perito dijo que vale el bien (puede ser 0 si no se tasó)."
+                },
+                "puja_minima": {
+                  "$ref": "#/$defs/importe_o_literal",
+                  "description": "Oferta más baja que se acepta; el literal «Sin puja mínima» significa que se puede ofrecer cualquier cantidad."
+                },
+                "tramos_pujas": {
+                  "$ref": "#/$defs/importe_o_literal",
+                  "description": "De cuánto en cuánto se puede subir la oferta."
+                },
+                "importe_deposito": {
+                  "$ref": "#/$defs/importe_o_literal",
+                  "description": "Fianza que hay que ingresar antes de poder pujar; se devuelve si no ganas."
+                },
+                "otros": { "$ref": "#/$defs/otros" }
+              }
+            }
+          ]
+        },
+        "descripcion": {
+          "$ref": "#/$defs/texto",
+          "title": "Resumen corto de qué se vende",
+          "description": "Tal y como lo escribe el organismo en el portal."
+        },
+        "descripcion_anuncio": {
+          "$ref": "#/$defs/texto",
+          "title": "Texto largo del anuncio oficial",
+          "description": "Detalles del embargo y condiciones, cuando el organismo lo publica."
+        },
+        "bienes": {
+          "type": "array",
+          "title": "Objetos físicos que se venden en esta unidad",
+          "description": "Normalmente uno: un piso, una plaza de garaje, un coche…",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/bien" }
+        },
+        "pujas": {
+          "type": "object",
+          "title": "Cómo van las ofertas de dinero",
+          "required": ["puja_mas_alta", "mensaje", "certificado_cierre"],
+          "additionalProperties": false,
+          "properties": {
+            "puja_mas_alta": {
+              "type": ["number", "null"],
+              "description": "Mejor oferta hasta ahora, en euros. Solo visible si la autoridad la hace pública, con sesión de usuario registrado."
+            },
+            "mensaje": {
+              "$ref": "#/$defs/texto",
+              "description": "Cuando no hay importe visible, el texto literal del portal (p. ej. «La subasta no ha recibido pujas.» o el aviso de que hay que iniciar sesión)."
+            },
+            "certificado_cierre": {
+              "$ref": "#/$defs/url",
+              "description": "En subastas terminadas, enlace al certificado oficial con el resultado."
+            }
+          }
+        },
+        "subasta": {
+          "type": "object",
+          "title": "Ficha de la subasta madre",
+          "description": "Datos comunes a todos los lotes de la subasta.",
+          "required": [
+            "identificador",
+            "tipo",
+            "estado",
+            "expediente",
+            "cuenta_expediente",
+            "fecha_inicio",
+            "fecha_conclusion",
+            "cantidad_reclamada",
+            "lotes",
+            "forma_adjudicacion",
+            "anuncio_boe",
+            "valor_subasta",
+            "tasacion",
+            "puja_minima",
+            "tramos_pujas",
+            "importe_deposito",
+            "advertencia",
+            "aviso_estado",
+            "documentos",
+            "autoridad_gestora",
+            "acreedores",
+            "administradores_concursales",
+            "aviso_relacionados",
+            "relacionados_otros",
+            "otros"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "identificador": {
+              "type": "string",
+              "pattern": "^SUB-",
+              "description": "Número de expediente de la subasta en el portal."
+            },
+            "tipo": {
+              "$ref": "#/$defs/texto",
+              "description": "Quién la organiza, con el literal del portal: «JUDICIAL EN VÍA DE APREMIO» (un juzgado), «AGENCIA TRIBUTARIA» (Hacienda estatal), «RECAUDACIÓN TRIBUTARIA» (Hacienda autonómica o local), «JUDICIAL CONCURSAL» (concurso de acreedores)…"
+            },
+            "estado": {
+              "$ref": "#/$defs/texto",
+              "description": "Momento de su vida en que está, con el literal del listado del buscador (la ficha no lo muestra): «Prox. apertura», «Celebrándose», «Suspendida», «Cancelada», «Pendiente de finalización y devolución de depósitos con reserva»…"
+            },
+            "expediente": {
+              "$ref": "#/$defs/texto",
+              "description": "Número del procedimiento judicial (solo subastas judiciales)."
+            },
+            "cuenta_expediente": {
+              "$ref": "#/$defs/texto",
+              "description": "Cuenta de consignaciones del juzgado donde se ingresan las fianzas."
+            },
+            "fecha_inicio": {
+              "$ref": "#/$defs/fecha",
+              "description": "Cuándo se abre el plazo para pujar. Las subastas de próxima apertura aún no la publican (null)."
+            },
+            "fecha_conclusion": {
+              "$ref": "#/$defs/fecha",
+              "description": "Cuándo se cierra el plazo para pujar (puede prorrogarse)."
+            },
+            "cantidad_reclamada": {
+              "$ref": "#/$defs/importe_o_literal",
+              "description": "Deuda total que originó la subasta."
+            },
+            "lotes": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Cuántos lotes tiene la subasta; 0 significa que se vende todo junto («Sin lotes» en el portal)."
+            },
+            "forma_adjudicacion": {
+              "$ref": "#/$defs/texto",
+              "description": "Si los lotes se venden por separado o en conjunto."
+            },
+            "anuncio_boe": {
+              "$ref": "#/$defs/texto",
+              "description": "Referencia del anuncio oficial publicado en el BOE.",
+              "examples": ["BOE-B-2026-27571"]
+            },
+            "valor_subasta": {
+              "$ref": "#/$defs/importe_o_literal",
+              "description": "Precio de referencia a nivel de subasta. Con lotes, el portal remite a cada lote con un literal «Ver valor de subasta en cada lote…»."
+            },
+            "tasacion": { "$ref": "#/$defs/importe_o_literal" },
+            "puja_minima": { "$ref": "#/$defs/importe_o_literal" },
+            "tramos_pujas": { "$ref": "#/$defs/importe_o_literal" },
+            "importe_deposito": { "$ref": "#/$defs/importe_o_literal" },
+            "advertencia": {
+              "$ref": "#/$defs/texto",
+              "description": "Aviso de cabecera del portal sobre las reglas de esta subasta (si la puja más alta es pública, posibilidad de prórroga…)."
+            },
+            "aviso_estado": {
+              "$ref": "#/$defs/texto",
+              "description": "Cartel destacado del portal sobre la situación de la subasta (p. ej. «LA SUBASTA HA CONCLUIDO SU PERIODO DE PUJAS…»)."
+            },
+            "documentos": {
+              "type": "array",
+              "description": "PDFs de la subasta: edicto, condiciones, certificación de cargas…",
+              "items": { "$ref": "#/$defs/documento" }
+            },
+            "autoridad_gestora": {
+              "title": "Quién organiza la subasta",
+              "description": "Órgano al que preguntar dudas: juzgado, oficina de la AEAT, hacienda autonómica…",
+              "oneOf": [
+                { "type": "null" },
+                {
+                  "type": "object",
+                  "required": [
+                    "codigo",
+                    "descripcion",
+                    "direccion",
+                    "telefono",
+                    "fax",
+                    "correo_electronico",
+                    "otros"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "codigo": { "$ref": "#/$defs/texto" },
+                    "descripcion": { "$ref": "#/$defs/texto" },
+                    "direccion": { "$ref": "#/$defs/texto" },
+                    "telefono": { "$ref": "#/$defs/texto" },
+                    "fax": { "$ref": "#/$defs/texto" },
+                    "correo_electronico": { "$ref": "#/$defs/texto" },
+                    "otros": { "$ref": "#/$defs/otros" }
+                  }
+                }
+              ]
+            },
+            "acreedores": {
+              "title": "A quién se le debe el dinero",
+              "description": "Solo cuando el portal lo publica (pestaña «Relacionados»). null si la subasta no lo muestra.",
+              "oneOf": [
+                { "type": "null" },
+                {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": { "$ref": "#/$defs/entidad" }
+                }
+              ]
+            },
+            "administradores_concursales": {
+              "title": "Administración concursal",
+              "description": "En subastas de concursos de acreedores (SUB-JC-…), el profesional que gestiona el concurso.",
+              "oneOf": [
+                { "type": "null" },
+                {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": { "$ref": "#/$defs/entidad" }
+                }
+              ]
+            },
+            "aviso_relacionados": {
+              "$ref": "#/$defs/texto",
+              "description": "Aviso de la pestaña «Relacionados» (p. ej. «Los datos de los acreedores privilegiados especiales no se muestran para esta subasta.»)."
+            },
+            "relacionados_otros": {
+              "title": "Entidades de «Relacionados» aún no tipificadas",
+              "description": "Si el portal muestra una entidad con un encabezado que este recolector no conoce, se conserva aquí bajo su encabezado literal en vez de perderse.",
+              "oneOf": [
+                { "type": "null" },
+                {
+                  "type": "object",
+                  "minProperties": 1,
+                  "additionalProperties": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": { "$ref": "#/$defs/entidad" }
+                  }
+                }
+              ]
+            },
+            "otros": { "$ref": "#/$defs/otros" }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "texto": {
+      "type": ["string", "null"],
+      "description": "Texto literal del portal, o null si no consta."
+    },
+    "fecha": {
+      "type": ["string", "null"],
+      "description": "Fecha y hora en ISO 8601, normalmente con huso horario (+01:00/+02:00 según la época del año). Si el portal no publica la forma con huso, se emite sin él y corresponde a hora peninsular española.",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}"
+    },
+    "url": {
+      "type": ["string", "null"],
+      "description": "Dirección pública en la fuente.",
+      "pattern": "^https?://"
+    },
+    "importe_o_literal": {
+      "type": ["number", "string", "null"],
+      "description": "Importe en euros como número. Si el portal publica una frase en su lugar, se conserva el literal. null cuando no consta."
+    },
+    "otros": {
+      "description": "Filas de la ficha cuya etiqueta este recolector no tiene tipificada: se conservan con la etiqueta y el valor literales del portal (sin normalizar: una fecha aparece aquí tal y como la escribe el portal, p. ej. «29-06-2020»), en vez de perderse. Añadir aquí un campo nuevo no cambia la versión del esquema.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "type": ["number", "string", "null"] }
+        }
+      ]
+    },
+    "documento": {
+      "type": "object",
+      "required": ["nombre", "url"],
+      "additionalProperties": false,
+      "properties": {
+        "nombre": { "$ref": "#/$defs/texto" },
+        "url": { "$ref": "#/$defs/url" }
+      }
+    },
+    "entidad": {
+      "type": "object",
+      "title": "Persona u organismo de la pestaña «Relacionados»",
+      "required": [
+        "nombre",
+        "nif",
+        "direccion",
+        "localidad",
+        "provincia",
+        "pais",
+        "otros"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "nombre": { "$ref": "#/$defs/texto" },
+        "nif": { "$ref": "#/$defs/texto" },
+        "direccion": { "$ref": "#/$defs/texto" },
+        "localidad": {
+          "$ref": "#/$defs/texto",
+          "description": "A veces incluye el código postal delante, tal y como lo publica el portal."
+        },
+        "provincia": { "$ref": "#/$defs/texto" },
+        "pais": { "$ref": "#/$defs/texto" },
+        "otros": { "$ref": "#/$defs/otros" }
+      }
+    },
+    "bien": {
+      "type": "object",
+      "title": "Objeto físico que se vende",
+      "required": [
+        "numero",
+        "tipo",
+        "subtipo",
+        "descripcion",
+        "idufir",
+        "referencia_catastral",
+        "direccion",
+        "codigo_postal",
+        "localidad",
+        "provincia",
+        "vivienda_habitual",
+        "situacion_posesoria",
+        "csv_certificacion_registral",
+        "informacion_registral_electronica",
+        "visitable",
+        "cargas",
+        "inscripcion_registral",
+        "titulo_juridico",
+        "informacion_adicional",
+        "documentos",
+        "imagenes",
+        "otros"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "numero": {
+          "type": "integer",
+          "description": "Orden del bien dentro de la unidad («Bien 1», «Bien 2»…)."
+        },
+        "tipo": {
+          "$ref": "#/$defs/texto",
+          "description": "Qué es, con el literal del portal: «Inmueble», «Vehículo»…"
+        },
+        "subtipo": {
+          "$ref": "#/$defs/texto",
+          "description": "Detalle del tipo: «Vivienda», «Garaje», «Turismos»…"
+        },
+        "descripcion": {
+          "$ref": "#/$defs/texto",
+          "description": "Descripción legal del bien, copiada de escrituras."
+        },
+        "idufir": {
+          "$ref": "#/$defs/texto",
+          "description": "Identificador único de la finca en el Registro de la Propiedad (como el DNI de un inmueble)."
+        },
+        "referencia_catastral": {
+          "$ref": "#/$defs/texto",
+          "description": "Código del Catastro (el mismo que aparece en el IBI); permite localizar el inmueble en la web del Catastro."
+        },
+        "direccion": { "$ref": "#/$defs/texto" },
+        "codigo_postal": { "$ref": "#/$defs/texto" },
+        "localidad": { "$ref": "#/$defs/texto" },
+        "provincia": { "$ref": "#/$defs/texto" },
+        "vivienda_habitual": {
+          "$ref": "#/$defs/texto",
+          "description": "«Sí» / «No»: si es la casa donde vive el deudor. Importa legalmente para el desalojo."
+        },
+        "situacion_posesoria": {
+          "$ref": "#/$defs/texto",
+          "description": "Quién lo ocupa ahora (vacío, el deudor, un inquilino…). Clave para el comprador."
+        },
+        "csv_certificacion_registral": {
+          "$ref": "#/$defs/texto",
+          "description": "Código para verificar el certificado del Registro que acompaña a la subasta."
+        },
+        "informacion_registral_electronica": {
+          "$ref": "#/$defs/texto",
+          "description": "Nota del portal sobre si pudo obtener la información del Registro por vía electrónica."
+        },
+        "visitable": {
+          "$ref": "#/$defs/texto",
+          "description": "Si se puede ir a ver el bien antes de pujar."
+        },
+        "cargas": {
+          "$ref": "#/$defs/importe_o_literal",
+          "description": "Deudas que siguen pegadas al bien después de comprarlo (hipotecas anteriores…). Puede ser un importe o una frase remitiendo a un documento. Lo más importante a revisar antes de pujar."
+        },
+        "inscripcion_registral": {
+          "$ref": "#/$defs/texto",
+          "description": "Dónde está apuntado en el Registro de la Propiedad (tomo, libro, folio, finca)."
+        },
+        "titulo_juridico": {
+          "$ref": "#/$defs/texto",
+          "description": "Qué se vende exactamente: «100% pleno dominio» es el bien entero; un porcentaje menor es solo una parte."
+        },
+        "informacion_adicional": {
+          "$ref": "#/$defs/texto",
+          "description": "Extras en texto libre (superficies, etc.)."
+        },
+        "documentos": {
+          "type": "array",
+          "description": "PDFs propios del bien: nota simple, datos del catastro…",
+          "items": { "$ref": "#/$defs/documento" }
+        },
+        "imagenes": {
+          "type": "array",
+          "description": "Enlaces a las fotos del bien.",
+          "items": { "$ref": "#/$defs/url" }
+        },
+        "otros": { "$ref": "#/$defs/otros" }
+      }
+    }
+  }
+}
