@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Portal de Subastas Electr&#xF3;nicas</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="Keywords" content="Subastas">
+    <meta name="Description" content="Portal de Subastas de la Agencia Estatal Bolet&#xED;n Oficial del Estado">
+    <!--[if lt IE 10]>
+    <link rel="stylesheet" type="text/css" href="/estilos/subastas_ie9.css" />
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" type="text/css" href="/estilos/subastas_ie8.css" />
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+    <link rel="stylesheet" href="/estilos/portalSubastas.css" title="comun" type="text/css"/>
+    <link rel="stylesheet" href="/estilos/form.css" title="comun" type="text/css"/>
+  </head>
+  <body>
+    <!-- Cabecera -->
+    <div id="cabecera">
+      <!-- Accesibilidad -->
+      <ul class="fuera">
+        <li><a accesskey="c" href="#contenido">Ir a contenido</a></li>
+      </ul>
+      <!-- Comienza la franja blanca con logos y enlaces a la derecha -->
+      <div id="logoInicio">
+        <span class="pc tablet" id="logoPresidenciaMovil">
+          <a href="https://www.mpr.gob.es/" title="Ir al Ministerio de la Presidencia">
+            <img src="/imagenes/logoMPRmovil.png" alt="Ministerio de la Presidencia">
+          </a>
+        </span>
+        <span id="logoPresidencia">
+          <a href="https://www.mpr.gob.es/" title="Ir al Ministerio de la Presidencia">
+            <img src="/imagenes/logoMPR.png" srcset="/imagenes/logoMPR.svg" alt="Ministerio de la Presidencia">
+          </a>
+        </span>
+        <span class="movil">
+          <a href="/" title="Ir a la p&#xE1;gina de inicio">
+            <img alt="Portal de Subastas" src="/imagenes/portal_subastas_270.png" srcset="/imagenes/portal_subastas_270.svg" />
+          </a>
+        </span>
+      </div><!-- Fin de logoInicio -->
+      <h1>
+        <a href="/" title="Ir a la p&#xE1;gina de inicio">
+          Portal de Subastas
+        </a>
+      </h1>
+      <p class="fuera">Portal de Subastas de la Agencia Estatal Bolet&#xED;n Oficial del Estado</p>
+      <span id="logoBOE">
+        <a href="https://www.boe.es" title="Ir a la p&#xE1;gina de la Agencia Estatal Bolet&#xED;n Oficial del Estado">
+          <img src="/imagenes/logo_boe.png"  alt="Agencia Estatal Bolet&#xED;n Oficial del Estado">
+        </a>
+      </span>
+    </div> <!-- #cabecera -->
+    <!-- Cuerpo -->
+    <div id="cuerpo">
+      <div id="top" class="banda-menu">
+        <div id="menu_principal" class="menu-wrapper">
+          <ul>
+            <li class="inicio pc tablet">
+              <a href="https://subastas.boe.es/reg/index.php"><span>Inicio</span></a>
+            </li>
+            <li class="buscar">
+              <a href="https://subastas.boe.es/reg/subastas_ava.php">
+                <span class="pc tablet">Buscar</span>
+                <span class="movil"><img alt="Buscar" src="/imagenes/logoBuscar_blanco.png" srcset="/imagenes/logoBuscar_blanco.svg"></span>
+              </a>
+            </li>
+            <li class="ayuda">
+              <a href="https://subastas.boe.es/reg/ayuda.php">
+                <span class="pc tablet">Ayuda</span>
+                <span class="movil"><img alt="Ayuda" src="/imagenes/ayuda.png" srcset="/imagenes/ayuda.svg"></span>
+              </a>
+            </li>
+            <li class="botonAcceso_on ico_acceso">
+              <a href="https://subastas.boe.es/reg/misDatos.php">
+                <span class="pc tablet">
+                  Mi Perfil 
+                  <span class="luz">Conectado como:<br/>BEATRIZ NAVIDAD MELNIKAVA</span>
+                </span>
+                <span class="movil"><img alt="Mi Perfil" src="/imagenes/logoAcceso_on.png" srcset="/imagenes/logoAcceso_on.svg"></span>
+              </a>
+            </li>
+          </ul>
+        </div><!-- #menu_principal -->
+      </div><!-- .banda-menu -->
+      <p class="disclaimer">
+        <span id="fechaOficial">Mi&#xE9;rcoles, 02 de septiembre de 2026</span>
+        <span id="horaOficial">00:16:47</span>
+        <span id="usoHorario" title="Hora Central Europea / Central European Time">CET</span>
+      </p>
+      <script>
+         var hoy = new Date(2026,9-1,2,00,16,47); 
+         function reloj(){
+            var hora = hoy.getHours(); 
+            var minutos = hoy.getMinutes(); 
+            var segundos = hoy.getSeconds(); 
+            if (hora<=9) hora = "0" + hora; 
+            if (minutos<=9) minutos = "0" + minutos; 
+            if (segundos<=9) segundos = "0" + segundos; 
+            var horaFinal = hora + ":" + minutos + ":" + segundos; 
+            var dia = new Array('Domingo','Lunes','Martes','Mi&#xe9;rcoles','Jueves','Viernes','S&#xe1;bado'); 
+            var mes = new Array('Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'); 
+            var anio = hoy.getFullYear(); 
+            var fecha = dia[hoy.getDay()] + ', ' + hoy.getDate() + ' de '  + mes[hoy.getMonth()] + ' de ' + anio ; 
+
+            document.getElementById('fechaOficial').innerHTML = fecha;
+            document.getElementById('horaOficial').innerHTML = horaFinal;
+
+            hoy.setSeconds(hoy.getSeconds() +1);
+            setTimeout('reloj()',1000);
+         } 
+         reloj();
+      </script>
+      <div id="contenedor">
+        <div id="contenido">
+          <div class="desconectar">
+            <a href="https://subastas.boe.es/reg/desconectar.php">Desconectar <img alt="desconectar" src="/imagenes/logout.png" srcset="/imagenes/logout.svg"></a>
+          </div>
+          <h2>Subasta SUB-JA-2026-262402</h2>
+          <div class="desconectar">
+            <a href="./detalleSubasta.php?idSub=SUB-JA-2026-262402&amp;ver=2&amp;idBus=&amp;acc=A">A&#xF1;adir a favoritas <img alt="A&#xF1;adir favorita" src="/imagenes/favicon_on.png" srcset="/imagenes/favicon_on.svg"></a>
+          </div>
+
+          <div class="caja gris aviso">
+            <p class="destaca"><strong>La subasta ha sido cancelada por la autoridad gestora</strong>.</p>
+            <p class="puntoPDF">
+              <a href="./verCertificadoCierre.php?idSub=SUB-JA-2026-262402" target="_blank">Certificado de cierre de la subasta en el Portal de Subastas</a>
+            </p>
+          </div>
+          <div id="tabs">
+            <input type="checkbox" class="desplegable" id="dropDownFiltro" value="" name="dropDownFiltro"/>
+            <label class="selected" for="dropDownFiltro" data-toggle="dropdown">Autoridad gestora</label>
+            <ul class="navlist">
+              <li>
+                <a href="./detalleSubasta.php?idSub=SUB-JA-2026-262402&amp;ver=1&amp;idBus=&amp;idLote=&amp;numPagBus=">Informaci&#xF3;n general</a>
+              </li>
+              <li>
+                <a href="./detalleSubasta.php?idSub=SUB-JA-2026-262402&amp;ver=2&amp;idBus=&amp;idLote=&amp;numPagBus=" class="current">Autoridad gestora</a>
+              </li>
+              <li>
+                <a href="./detalleSubasta.php?idSub=SUB-JA-2026-262402&amp;ver=3&amp;idBus=&amp;idLote=&amp;numPagBus=">Bienes</a>
+              </li>
+              <li>
+                <a href="./detalleSubasta.php?idSub=SUB-JA-2026-262402&amp;ver=4&amp;idBus=&amp;idLote=&amp;numPagBus=">Relacionados</a>
+              </li>
+              <li>
+                <a href="./detalleSubasta.php?idSub=SUB-JA-2026-262402&amp;ver=5&amp;idBus=&amp;idLote=&amp;numPagBus=">Pujas</a>
+              </li>
+            </ul>
+          </div>
+          <div id="idBloqueDatos2">
+            <h3>Datos de la autoridad gestora</h3>
+            <table>
+              <tr>
+                <th>C&#xF3;digo</th>
+                <td>0704042014</td>
+              </tr>
+              <tr>
+                <th>Descripci&#xF3;n</th>
+                <td>Secci&#xF3;n Civil TI Palma. Plz.n 14</td>
+              </tr>
+              <tr>
+                <th>Direcci&#xF3;n</th>
+                <td>TR D'EN BALLESTER 20 S/N   ; 07002 PALMA DE MALLORCA</td>
+              </tr>
+              <tr>
+                <th>Tel&#xE9;fono</th>
+                <td>971219704</td>
+              </tr>
+              <tr>
+                <th>Fax</th>
+                <td>971219495</td>
+              </tr>
+              <tr>
+                <th>Correo electr&#xF3;nico</th>
+                <td>francisca.alemanyjuan@justicia.es</td>
+              </tr>
+            </table>
+          </div>
+          <div class="bloqueBotones">
+            <a class="boton" href="/reg/index.php">Volver a la p&#xE1;gina de inicio</a>
+          </div>
+        </div> <!-- /contenido -->
+      </div> <!-- /contenedor -->
+    </div> <!-- #cuerpo -->
+    <div id="pie">
+      <div id="menuPie">
+        <div class="franjaMenu">
+          <ul>
+            <li><a href="https://subastas.boe.es/textoPolitica.php" target="_blank" title="Abre nueva ventana">Acerca del Portal</a></li>
+          </ul>
+        </div> <!-- .franjaMenu -->
+      </div> <!-- #menuPie -->
+      <div class="franja-pie">
+        <p>Agencia Estatal Bolet&#xED;n Oficial del Estado</p>
+        <p><abbr title="Avenida">Avda.</abbr> de Manoteras, 54 - 28050 Madrid</p>
+      </div>
+    </div> <!-- #pie -->
+    <script src="/lib/js/desplegable.js"></script>
+  </body>
+</html>

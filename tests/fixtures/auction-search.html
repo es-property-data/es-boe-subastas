@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Portal de Subastas Electr&#xF3;nicas</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="Keywords" content="Subastas">
+    <meta name="Description" content="Portal de Subastas de la Agencia Estatal Bolet&#xED;n Oficial del Estado">
+    <!--[if lt IE 10]>
+    <link rel="stylesheet" type="text/css" href="/estilos/subastas_ie9.css" />
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" type="text/css" href="/estilos/subastas_ie8.css" />
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+    <link rel="stylesheet" href="/estilos/portalSubastas.css" title="comun" type="text/css"/>
+    <link rel="stylesheet" href="/estilos/buscar.css" title="comun" type="text/css"/>
+  </head>
+  <body>
+    <!-- Cabecera -->
+    <div id="cabecera">
+      <!-- Accesibilidad -->
+      <ul class="fuera">
+        <li><a accesskey="c" href="#contenido">Ir a contenido</a></li>
+      </ul>
+      <!-- Comienza la franja blanca con logos y enlaces a la derecha -->
+      <div id="logoInicio">
+        <span class="pc tablet" id="logoPresidenciaMovil">
+          <a href="https://www.mpr.gob.es/" title="Ir al Ministerio de la Presidencia">
+            <img src="/imagenes/logoMPRmovil.png" alt="Ministerio de la Presidencia">
+          </a>
+        </span>
+        <span id="logoPresidencia">
+          <a href="https://www.mpr.gob.es/" title="Ir al Ministerio de la Presidencia">
+            <img src="/imagenes/logoMPR.png" srcset="/imagenes/logoMPR.svg" alt="Ministerio de la Presidencia">
+          </a>
+        </span>
+        <span class="movil">
+          <a href="/" title="Ir a la p&#xE1;gina de inicio">
+            <img alt="Portal de Subastas" src="/imagenes/portal_subastas_270.png" srcset="/imagenes/portal_subastas_270.svg" />
+          </a>
+        </span>
+      </div><!-- Fin de logoInicio -->
+      <h1>
+        <a href="/" title="Ir a la p&#xE1;gina de inicio">
+          Portal de Subastas
+        </a>
+      </h1>
+      <p class="fuera">Portal de Subastas de la Agencia Estatal Bolet&#xED;n Oficial del Estado</p>
+      <span id="logoBOE">
+        <a href="https://www.boe.es" title="Ir a la p&#xE1;gina de la Agencia Estatal Bolet&#xED;n Oficial del Estado">
+          <img src="/imagenes/logo_boe.png"  alt="Agencia Estatal Bolet&#xED;n Oficial del Estado">
+        </a>
+      </span>
+    </div> <!-- #cabecera -->
+    <!-- Cuerpo -->
+    <div id="cuerpo">
+      <div id="top" class="banda-menu">
+        <div id="menu_principal" class="menu-wrapper">
+          <ul>
+            <li class="inicio pc tablet">
+              <a href="https://subastas.boe.es/reg/index.php"><span>Inicio</span></a>
+            </li>
+            <li class="buscar">
+              <a href="https://subastas.boe.es/reg/subastas_ava.php">
+                <span class="pc tablet">Buscar</span>
+                <span class="movil"><img alt="Buscar" src="/imagenes/logoBuscar_blanco.png" srcset="/imagenes/logoBuscar_blanco.svg"></span>
+              </a>
+            </li>
+            <li class="ayuda">
+              <a href="https://subastas.boe.es/reg/ayuda.php">
+                <span class="pc tablet">Ayuda</span>
+                <span class="movil"><img alt="Ayuda" src="/imagenes/ayuda.png" srcset="/imagenes/ayuda.svg"></span>
+              </a>
+            </li>
+            <li class="botonAcceso_on ico_acceso">
+              <a href="https://subastas.boe.es/reg/misDatos.php">
+                <span class="pc tablet">
+                  Mi Perfil 
+                  <span class="luz">Conectado como:<br/>BEATRIZ NAVIDAD MELNIKAVA</span>
+                </span>
+                <span class="movil"><img alt="Mi Perfil" src="/imagenes/logoAcceso_on.png" srcset="/imagenes/logoAcceso_on.svg"></span>
+              </a>
+            </li>
+          </ul>
+        </div><!-- #menu_principal -->
+      </div><!-- .banda-menu -->
+      <p class="disclaimer">
+        <span id="fechaOficial">Mi&#xE9;rcoles, 02 de septiembre de 2026</span>
+        <span id="horaOficial">04:21:30</span>
+        <span id="usoHorario" title="Hora Central Europea / Central European Time">CET</span>
+      </p>
+      <script>
+         var hoy = new Date(2026,9-1,2,04,21,30); 
+         function reloj(){
+            var hora = hoy.getHours(); 
+            var minutos = hoy.getMinutes(); 
+            var segundos = hoy.getSeconds(); 
+            if (hora<=9) hora = "0" + hora; 
+            if (minutos<=9) minutos = "0" + minutos; 
+            if (segundos<=9) segundos = "0" + segundos; 
+            var horaFinal = hora + ":" + minutos + ":" + segundos; 
+            var dia = new Array('Domingo','Lunes','Martes','Mi&#xe9;rcoles','Jueves','Viernes','S&#xe1;bado'); 
+            var mes = new Array('Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'); 
+            var anio = hoy.getFullYear(); 
+            var fecha = dia[hoy.getDay()] + ', ' + hoy.getDate() + ' de '  + mes[hoy.getMonth()] + ' de ' + anio ; 
+
+            document.getElementById('fechaOficial').innerHTML = fecha;
+            document.getElementById('horaOficial').innerHTML = horaFinal;
+
+            hoy.setSeconds(hoy.getSeconds() +1);
+            setTimeout('reloj()',1000);
+         } 
+         reloj();
+      </script>
+      <div id="contenedor">
+        <div id="contenido">
+          <div class="desconectar">
+            <a href="https://subastas.boe.es/reg/desconectar.php">Desconectar <img alt="desconectar" src="/imagenes/logout.png" srcset="/imagenes/logout.svg"></a>
+          </div>
+          <h2>Subastas. Búsqueda avanzada</h2>
+          <form method="post" action="subastas_ava.php" target="_top" accept-charset="UTF-8">
+            <fieldset class="caja gris">
+              <div class="tabla">
+                <fieldset class="radio-check">
+                  <legend>Tipo de subasta</legend>
+                  <input type="hidden" name="campo[0]" value="SUBASTA.ORIGEN"/>
+                  <input type="radio" id="idOrigenTodos" value="" name="dato[0]" checked="checked">
+                  <label for="idOrigenTodos">Todos</label>
+                  <input type="radio" id="idOrigenJ" value="J" name="dato[0]">
+                  <label for="idOrigenJ">Judicial</label>
+                  <input type="radio" id="idOrigenN" value="N" name="dato[0]">
+                  <label for="idOrigenN">Notarial</label>
+                  <input type="radio" id="idOrigenA" value="A" name="dato[0]">
+                  <label for="idOrigenA">AEAT</label>
+                  <input type="radio" id="idOrigenR" value="R" name="dato[0]">
+                  <label for="idOrigenR">Otras administraciones tributarias</label>
+                  <input type="radio" id="idOrigenG" value="G" name="dato[0]">
+                  <label for="idOrigenG">Subastas administrativas generales</label>
+                  <div class="tabla" id="id_autoridad_gestora">
+                    <p class="fila">
+                      <span class="celda">
+                        <label for="SUBASTA.AUTORIDAD">Autoridad Gestora</label>
+                      </span>
+                      <span class="celda">
+                        <input type="hidden" name="campo[1]" value="SUBASTA.AUTORIDAD">
+                        <input type="text" maxlength="200" size="80" name="dato[1]" id="SUBASTA.AUTORIDAD" value="">
+                      </span>
+                    </p>
+                  </div>
+                </fieldset>
+                <fieldset class="radio-check">
+                  <legend>Estado de la subasta</legend>
+                  <input type="hidden" name="campo[2]" value="SUBASTA.ESTADO.CODIGO"/>
+                  <label for="idEstadoTodos">
+                    <input type="radio" id="idEstadoTodos" value="" name="dato[2]" checked="checked">
+                    <span>Cualquiera</span>
+                  </label>
+                  <label for="idEstadoPU">
+                    <input type="radio" id="idEstadoPU" value="PU" name="dato[2]">
+                    <span>Prox. apertura</span>
+                  </label>
+                  <label for="idEstadoEJ">
+                    <input type="radio" id="idEstadoEJ" value="EJ" name="dato[2]">
+                    <span>Celebr&#xE1;ndose</span>
+                  </label>
+                  <label for="idEstadoSU">
+                    <input type="radio" id="idEstadoSU" value="SU" name="dato[2]">
+                    <span>Suspendida</span>
+                  </label>
+                  <label for="idEstadoCA">
+                    <input type="radio" id="idEstadoCA" value="CA" name="dato[2]">
+                    <span>Cancelada</span>
+                  </label>
+                  <label for="idEstadoPC">
+                    <input type="radio" id="idEstadoPC" value="PC" name="dato[2]">
+                    <span>Concluida en Portal de Subastas</span>
+                  </label>
+                  <label for="idEstadoFS">
+                    <input type="radio" id="idEstadoFS" value="FS" name="dato[2]">
+                    <span>Finalizada por Autoridad Gestora</span>
+                  </label>
+                </fieldset>
+                <fieldset class="radio-check">
+                  <legend>Tipo de bien subastado</legend>
+                  <input type="hidden" name="campo[3]" value="BIEN.TIPO"/>
+                  <input type="radio" id="idTipoBien" value="" name="dato[3]" checked="checked"/>
+                  <label for="idTipoBien">Todos</label>
+                  <input type="radio" id="idTipoBienI" value="I" name="dato[3]"  onclick="javascript:document.getElementById('idSubtipoBienITodos').checked='checked'"/>
+                  <label for="idTipoBienI">Inmuebles</label>
+                  <input type="radio" id="idTipoBienV" value="V" name="dato[3]"  onclick="javascript:document.getElementById('idSubtipoBienVTodos').checked='checked'"/>
+                  <label for="idTipoBienV">Veh&#xED;culos</label>
+                  <input type="radio" id="idTipoBienM" value="M" name="dato[3]"  onclick="javascript:document.getElementById('idSubtipoBienOTodos').checked='checked'"/>
+                  <label for="idTipoBienM">Otros bienes muebles</label>
+                  <fieldset class="radio-check" id="id_desplegable_inmuebles">
+                    <label for="idSubtipoBienITodos">
+                      <input type="radio" id="idSubtipoBienITodos" value="" name="dato[4]" checked="checked">
+                      <span>Todos</span>
+                    </label>
+                    <label for="idSubtipoBien501">
+                      <input type="radio" id="idSubtipoBien501" value="501" name="dato[4]">
+                      <span>Vivienda</span>
+                    </label>
+                    <label for="idSubtipoBien502">
+                      <input type="radio" id="idSubtipoBien502" value="502" name="dato[4]">
+                      <span>Local comercial</span>
+                    </label>
+                    <label for="idSubtipoBien503">
+                      <input type="radio" id="idSubtipoBien503" value="503" name="dato[4]">
+                      <span>Garaje</span>
+                    </label>
+                    <label for="idSubtipoBien504">
+                      <input type="radio" id="idSubtipoBien504" value="504" name="dato[4]">
+                      <span>Trastero</span>
+                    </label>
+                    <label for="idSubtipoBien505">
+                      <input type="radio" id="idSubtipoBien505" value="505" name="dato[4]">
+                      <span>Nave industrial</span>
+                    </label>
+                    <label for="idSubtipoBien506">
+                      <input type="radio" id="idSubtipoBien506" value="506" name="dato[4]">
+                      <span>Solar</span>
+                    </label>
+                    <label for="idSubtipoBien507">
+                      <input type="radio" id="idSubtipoBien507" value="507" name="dato[4]">
+                      <span>Finca r&#xFA;stica</span>
+                    </label>
+                    <label for="idSubtipoBien599">
+                      <input type="radio" id="idSubtipoBien599" value="599" name="dato[4]">
+                      <span>Otros</span>
+                    </label>
+                  </fieldset>
+                  <fieldset class="radio-check" id="id_desplegable_vehiculos">
+                    <label for="idSubtipoBienVTodos">
+                      <input type="radio" id="idSubtipoBienVTodos" value="" name="dato[4]" checked="checked">
+                      <span>Todos</span>
+                    </label>
+                    <label for="idSubtipoBien9101">
+                      <input type="radio" id="idSubtipoBien9101" value="9101" name="dato[4]">
+                      <span>Turismos</span>
+                    </label>
+                    <label for="idSubtipoBien9102">
+                      <input type="radio" id="idSubtipoBien9102" value="9102" name="dato[4]">
+                      <span>Industriales</span>
+                    </label>
+                    <label for="idSubtipoBien9103">
+                      <input type="radio" id="idSubtipoBien9103" value="9103" name="dato[4]">
+                      <span>Otros</span>
+                    </label>
+                  </fieldset>
+                  <fieldset class="radio-check" id="id_desplegable_muebles">
+                    <label for="idSubtipoBienOTodos">
+                      <input type="radio" id="idSubtipoBienOTodos" value="" name="dato[4]" checked="checked">
+                      <span>Todos</span>
+                    </label>
+                    <label for="idSubtipoBien13">
+                      <input type="radio" id="idSubtipoBien13" value="13" name="dato[4]">
+                      <span>Aeronaves</span>
+                    </label>
+                    <label for="idSubtipoBien14">
+                      <input type="radio" id="idSubtipoBien14" value="14" name="dato[4]">
+                      <span>Buques</span>
+                    </label>
+                    <label for="idSubtipoBien18">
+                      <input type="radio" id="idSubtipoBien18" value="18" name="dato[4]">
+                      <span>Concesiones administrativas</span>
+                    </label>
+                    <label for="idSubtipoBien4">
+                      <input type="radio" id="idSubtipoBien4" value="4" name="dato[4]">
+                      <span>Derechos de propiedad industrial</span>
+                    </label>
+                    <label for="idSubtipoBien3">
+                      <input type="radio" id="idSubtipoBien3" value="3" name="dato[4]">
+                      <span>Derechos de propiedad intelectual</span>
+                    </label>
+                    <label for="idSubtipoBien1">
+                      <input type="radio" id="idSubtipoBien1" value="1" name="dato[4]">
+                      <span>Derechos de traspaso</span>
+                    </label>
+                    <label for="idSubtipoBien2">
+                      <input type="radio" id="idSubtipoBien2" value="2" name="dato[4]">
+                      <span>Instalaciones</span>
+                    </label>
+                    <label for="idSubtipoBien17">
+                      <input type="radio" id="idSubtipoBien17" value="17" name="dato[4]">
+                      <span>Joyas, obras de arte y antig&#xFC;edades</span>
+                    </label>
+                    <label for="idSubtipoBien5">
+                      <input type="radio" id="idSubtipoBien5" value="5" name="dato[4]">
+                      <span>Maquinaria</span>
+                    </label>
+                    <label for="idSubtipoBien8">
+                      <input type="radio" id="idSubtipoBien8" value="8" name="dato[4]">
+                      <span>Mercader&#xED;das y materias primas</span>
+                    </label>
+                    <label for="idSubtipoBien7">
+                      <input type="radio" id="idSubtipoBien7" value="7" name="dato[4]">
+                      <span>Mobiliario</span>
+                    </label>
+                    <label for="idSubtipoBien11">
+                      <input type="radio" id="idSubtipoBien11" value="11" name="dato[4]">
+                      <span>Tarjetas de transporte</span>
+                    </label>
+                    <label for="idSubtipoBien16">
+                      <input type="radio" id="idSubtipoBien16" value="16" name="dato[4]">
+                      <span>Tranv&#xED;a</span>
+                    </label>
+                    <label for="idSubtipoBien6">
+                      <input type="radio" id="idSubtipoBien6" value="6" name="dato[4]">
+                      <span>Utensilios y herramientas</span>
+                    </label>
+                    <label for="idSubtipoBien15">
+                      <input type="radio" id="idSubtipoBien15" value="15" name="dato[4]">
+                      <span>Vag&#xF3;n</span>
+                    </label>
+                    <label for="idSubtipoBien99">
+                      <input type="radio" id="idSubtipoBien99" value="99" name="dato[4]">
+                      <span>Otros bienes y derechos</span>
+                    </label>
+                  </fieldset>
+                </fieldset>
+              </div>
+              <fieldset>
+                <legend>Domicilio del inmueble o direcci&#xF3;n del dep&#xF3;sito de los veh&#xED;culos y otros bienes muebles</legend>
+                <div class="tabla">
+                  <p class="fila">
+                    <span class="celda">
+                      <label for="BIEN.DIRECCION">Dirección</label>
+                    </span>
+                    <span class="celda">
+                      <input type="hidden" name="campo[5]" value="BIEN.DIRECCION">
+                      <input type="text" maxlength="200" size="80" name="dato[5]" id="BIEN.DIRECCION" value="">
+                    </span>
+                  </p>
+                  <p class="fila">
+                    <span class="celda">
+                      <label for="BIEN.CODPOSTAL">Código postal</label>
+                    </span>
+                    <span class="celda">
+                      <input type="hidden" name="campo[6]" value="BIEN.CODPOSTAL">
+                      <input type="text" size="5" maxlength="5" name="dato[6]" id="BIEN.CODPOSTAL" value="">
+                    </span>
+                  </p>
+                  <p class="fila">
+                    <span class="celda">
+                      <label for="BIEN.LOCALIDAD">Localidad</label>
+                    </span>
+                    <span class="celda">
+                      <input type="hidden" name="campo[7]" value="BIEN.LOCALIDAD">
+                      <input type="text" maxlength="200" size="45" name="dato[7]" id="BIEN.LOCALIDAD" value="">
+                    </span>
+                  </p>
+                  <p class="fila">
+                    <span class="celda">
+                      <label for="BIEN.COD_PROVINCIA">Provincia</label>
+                      <input type="hidden" name="campo[8]" value="BIEN.COD_PROVINCIA" >
+                    </span>
+                    <span class="celda">
+                      <select name="dato[8]" size="1" id="BIEN.COD_PROVINCIA">
+                        <option value="">-- Todas --</option>
+                        <option value="01">Araba/&#xC1;lava</option>
+                        <option value="02">Albacete</option>
+                        <option value="03">Alicante/Alacant</option>
+                        <option value="04">Almer&#xED;a</option>
+                        <option value="05">&#xC1;vila</option>
+                        <option value="06">Badajoz</option>
+                        <option value="07">Illes Balears</option>
+                        <option value="08">Barcelona</option>
+                        <option value="09">Burgos</option>
+                        <option value="10">C&#xE1;ceres</option>
+                        <option value="11">C&#xE1;diz</option>
+                        <option value="12">Castell&#xF3;n/Castell&#xF3;</option>
+                        <option value="13">Ciudad Real</option>
+                        <option value="14">C&#xF3;rdoba</option>
+                        <option value="15">A Coru&#xF1;a</option>
+                        <option value="16">Cuenca</option>
+                        <option value="17">Girona</option>
+                        <option value="18">Granada</option>
+                        <option value="19">Guadalajara</option>
+                        <option value="20">Gipuzkoa</option>
+                        <option value="21">Huelva</option>
+                        <option value="22">Huesca</option>
+                        <option value="23">Ja&#xE9;n</option>
+                        <option value="24">Le&#xF3;n</option>
+                        <option value="25">Lleida</option>
+                        <option value="26">La Rioja</option>
+                        <option value="27">Lugo</option>
+                        <option value="28">Madrid</option>
+                        <option value="29">M&#xE1;laga</option>
+                        <option value="30">Murcia</option>
+                        <option value="31">Navarra</option>
+                        <option value="32">Ourense</option>
+                        <option value="33">Asturias</option>
+                        <option value="34">Palencia</option>
+                        <option value="35">Las Palmas</option>
+                        <option value="36">Pontevedra</option>
+                        <option value="37">Salamanca</option>
+                        <option value="38">Santa Cruz de Tenerife</option>
+                        <option value="39">Cantabria</option>
+                        <option value="40">Segovia</option>
+                        <option value="41">Sevilla</option>
+                        <option value="42">Soria</option>
+                        <option value="43">Tarragona</option>
+                        <option value="44">Teruel</option>
+                        <option value="45">Toledo</option>
+                        <option value="46">Valencia/Val&#xE8;ncia</option>
+                        <option value="47">Valladolid</option>
+                        <option value="48">Bizkaia</option>
+                        <option value="49">Zamora</option>
+                        <option value="50">Zaragoza</option>
+                        <option value="51">Ceuta</option>
+                        <option value="52">Melilla</option>
+                        <option value="00">No consta</option>
+                      </select>
+                    </span>
+                  </p>
+                </div>
+              </fieldset>
+              <div class="tabla">
+                <p class="fila">
+                  <span class="celda">
+                    <label for="SUBASTA.POSTURA_MINIMA_MINIMA_LOTES">Postura mínima inferior a</label>
+                  </span>
+                  <span class="celda">
+                    <input type="hidden" name="campo[9]" value="SUBASTA.POSTURA_MINIMA_MINIMA_LOTES">
+                    <select name="dato[9]" size="1" id="SUBASTA.POSTURA_MINIMA_MINIMA_LOTES">
+                      <option label=" " value="" selected></option>
+                      <option value="5000000">50.000</option>
+                      <option value="10000000">100.000</option>
+                      <option value="15000000">150.000</option>
+                      <option value="20000000">200.000</option>
+                      <option value="25000000">250.000</option>
+                      <option value="30000000">300.000</option>
+                      <option value="35000000">350.000</option>
+                      <option value="40000000">400.000</option>
+                      <option value="45000000">450.000</option>
+                      <option value="50000000">500.000</option>
+                      <option value="55000000">550.000</option>
+                      <option value="60000000">600.000</option>
+                      <option value="65000000">650.000</option>
+                      <option value="70000000">700.000</option>
+                      <option value="75000000">750.000</option>
+                      <option value="80000000">800.000</option>
+                      <option value="85000000">850.000</option>
+                      <option value="90000000">900.000</option>
+                      <option value="100000000">1 mill&#xF3;n</option>
+                      <option value="200000000">2 millones</option>
+                      <option value="300000000">3 millones</option>
+                    </select>
+                    <em>(eur)</em>
+                  </span>
+                </p>
+                <p class="fila">
+                  <span class="celda">
+                    <label for="SUBASTA.NUM_CUENTA_EXPEDIENTE_1">Cuenta expediente</label>
+                  </span>
+                  <span class="celda">
+                    <input type="hidden" name="campo[10]" value="SUBASTA.NUM_CUENTA_EXPEDIENTE_1">
+                    <input type="text" size="4" maxlength="4" name="dato[10]" id="SUBASTA.NUM_CUENTA_EXPEDIENTE_1" value="">
+                    <input type="hidden" name="campo[11]" value="SUBASTA.NUM_CUENTA_EXPEDIENTE_2">
+                    <input type="text" size="4" maxlength="4" name="dato[11]" id="SUBASTA.NUM_CUENTA_EXPEDIENTE_2" value="">
+                    <input type="hidden" name="campo[12]" value="SUBASTA.NUM_CUENTA_EXPEDIENTE_3">
+                    <input type="text" size="2" maxlength="2" name="dato[12]" id="SUBASTA.NUM_CUENTA_EXPEDIENTE_3" value="">
+                    <input type="hidden" name="campo[13]" value="SUBASTA.NUM_CUENTA_EXPEDIENTE_4">
+                    <input type="text" size="4" maxlength="4" name="dato[13]" id="SUBASTA.NUM_CUENTA_EXPEDIENTE_4" value="">
+                    <input type="hidden" name="campo[14]" value="SUBASTA.NUM_CUENTA_EXPEDIENTE_5">
+                    <input type="text" size="2" maxlength="2" name="dato[14]" id="SUBASTA.NUM_CUENTA_EXPEDIENTE_5" value="">
+                    <em>(solo&nbsp;en&nbsp;subastas&nbsp;judiciales)</em>
+                  </span>
+                </p>
+                <p class="fila">
+                  <span class="celda">
+                    <label for="SUBASTA.ID_SUBASTA_BUSCAR">ID Subasta</label>
+                  </span>
+                  <span class="celda">
+                    <input type="hidden" name="campo[15]" value="SUBASTA.ID_SUBASTA_BUSCAR">
+                    <input type="text" size="30" maxlength="30" name="dato[15]" id="SUBASTA.ID_SUBASTA_BUSCAR" value="">
+                  </span>
+                </p>
+              </div>
+              <div class="tabla grupoCasillas">
+                <p class="fila">
+                  <span class="celda">
+                    <label for="SUBASTA.ACREEDORES">Acreedor</label>
+                  </span>
+                  <span class="celda">
+                    <input type="hidden" name="campo[16]" value="SUBASTA.ACREEDORES">
+                    <input type="text" size="30" maxlength="30" name="dato[16]" id="SUBASTA.ACREEDORES" value="">
+                  </span>
+                </p>
+              </div>
+              <div class="tabla grupoCasillas">
+                <p class="fila">
+                  <span class="grupoCasillas">
+                    <span class="celda">
+                      <input type="hidden" name="campo[17]" value="SUBASTA.FECHA_FIN">
+                      <label for="desdeFP">Fecha fin Subasta de</label>
+                    </span>
+                    <span class="celda">
+                      <input type="date" name="dato[17][0]" id="desdeFP" value="" placeholder="dd/mm/yyyy">
+                    </span>
+                  </span>
+                  <span class="grupoCasillas">
+                    <span class="celda">
+                      <label for="hastaFP">a</label>
+                    </span>
+                    <span class="celda">
+                      <input type="date" name="dato[17][1]" id="hastaFP" value="" placeholder="dd/mm/yyyy">
+                    </span>
+                  </span>
+                </p>
+                <p class="fila">
+                  <span class="grupoCasillas">
+                    <span class="celda">
+                      <input type="hidden" name="campo[18]" value="SUBASTA.FECHA_INICIO">
+                      <label for="desdeIP">Fecha inicio Subasta de</label>
+                    </span>
+                    <span class="celda">
+                      <input type="date" name="dato[18][0]" id="desdeIP" value="" placeholder="dd/mm/yyyy">
+                    </span>
+                  </span>
+                  <span class="grupoCasillas">
+                    <span class="celda">
+                      <label for="hastaIP">a</label>
+                    </span>
+                    <span class="celda">
+                      <input type="date" name="dato[18][1]" id="hastaIP" value="" placeholder="dd/mm/yyyy">
+                    </span>
+                  </span>
+                </p>
+              </div>
+              <div class="tabla grupoCasillas">
+                <p class="fila">
+                  <span class="grupoCasillas">
+                    <span class="celda"><label for="mostrar">Resultados por p&#xE1;gina</label></span>
+                    <span class="celda">
+                      <select name="page_hits" id="mostrar" title="N&#xFA;mero de documentos por p&#xE1;gina">
+                        <option value="50" selected>50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="500">500</option>
+                      </select>
+                    </span>
+                  </span>
+                  <span class="grupoCasillas">
+                    <span class="celda"><label for="orden">Ordenados por</label></span>
+                    <span class="celda">
+                      <label class="fuera" for="op00">Tipo de ordenaci&#xF3;n</label>
+                      <select name="sort_field[0]" size="1" title="Ordenar por campos" id="op00">
+                        <option value="SUBASTA.FECHA_FIN">Fecha fin subasta</option>
+                        <option value="SUBASTA.ID_SUBASTA_ORDENAR">Identificador subasta</option>
+                        <option value="SUBASTA.ESTADO.CODIGO">Estado</option>
+                        <option value="SUBASTA.POSTURA_MINIMA_MINIMA_LOTES">Postura m&#xED;nima</option>
+                      </select>                      
+                      <label class="fuera" for="op00">Tipo de ordenaci&#xF3;n</label>
+                      <select name="sort_order[0]" size="1" title="Modo de ordenar por campos" id="orden">
+                        <option value="desc">descendente</option>
+                        <option value="asc" selected>ascendente</option>
+                      </select>
+                    </span>
+                  </span>
+                </p>
+              </div>
+            </fieldset>
+            <div class="bloqueBotones">
+              <input type="submit" name="accion" value="Buscar"  title="Buscar"  class="boton" />
+              <input type="submit" name="accion" value="Limpiar" title="Limpiar" class="boton" />
+            </div>
+          </form>
+        </div> <!-- /contenido -->
+      </div> <!-- /contenedor -->
+    </div> <!-- #cuerpo -->
+    <div id="pie">
+      <div id="menuPie">
+        <div class="franjaMenu">
+          <ul>
+            <li><a href="https://subastas.boe.es/textoPolitica.php" target="_blank" title="Abre nueva ventana">Acerca del Portal</a></li>
+          </ul>
+        </div> <!-- .franjaMenu -->
+      </div> <!-- #menuPie -->
+      <div class="franja-pie">
+        <p>Agencia Estatal Bolet&#xED;n Oficial del Estado</p>
+        <p><abbr title="Avenida">Avda.</abbr> de Manoteras, 54 - 28050 Madrid</p>
+      </div>
+    </div> <!-- #pie -->
+    <script src="/lib/js/desplegable.js"></script>
+  </body>
+</html>

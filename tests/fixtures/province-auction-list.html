@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Portal de Subastas Electr&#xF3;nicas</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="Keywords" content="Subastas">
+    <meta name="Description" content="Portal de Subastas de la Agencia Estatal Bolet&#xED;n Oficial del Estado">
+    <!--[if lt IE 10]>
+    <link rel="stylesheet" type="text/css" href="/estilos/subastas_ie9.css" />
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" type="text/css" href="/estilos/subastas_ie8.css" />
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+    <link rel="stylesheet" href="/estilos/portalSubastas.css" title="comun" type="text/css"/>
+    <link rel="stylesheet" href="/estilos/buscar.css" title="comun" type="text/css"/>
+  </head>
+  <body>
+    <!-- Cabecera -->
+    <div id="cabecera">
+      <!-- Accesibilidad -->
+      <ul class="fuera">
+        <li><a accesskey="c" href="#contenido">Ir a contenido</a></li>
+      </ul>
+      <!-- Comienza la franja blanca con logos y enlaces a la derecha -->
+      <div id="logoInicio">
+        <span class="pc tablet" id="logoPresidenciaMovil">
+          <a href="https://www.mpr.gob.es/" title="Ir al Ministerio de la Presidencia">
+            <img src="/imagenes/logoMPRmovil.png" alt="Ministerio de la Presidencia">
+          </a>
+        </span>
+        <span id="logoPresidencia">
+          <a href="https://www.mpr.gob.es/" title="Ir al Ministerio de la Presidencia">
+            <img src="/imagenes/logoMPR.png" srcset="/imagenes/logoMPR.svg" alt="Ministerio de la Presidencia">
+          </a>
+        </span>
+        <span class="movil">
+          <a href="/" title="Ir a la p&#xE1;gina de inicio">
+            <img alt="Portal de Subastas" src="/imagenes/portal_subastas_270.png" srcset="/imagenes/portal_subastas_270.svg" />
+          </a>
+        </span>
+      </div><!-- Fin de logoInicio -->
+      <h1>
+        <a href="/" title="Ir a la p&#xE1;gina de inicio">
+          Portal de Subastas
+        </a>
+      </h1>
+      <p class="fuera">Portal de Subastas de la Agencia Estatal Bolet&#xED;n Oficial del Estado</p>
+      <span id="logoBOE">
+        <a href="https://www.boe.es" title="Ir a la p&#xE1;gina de la Agencia Estatal Bolet&#xED;n Oficial del Estado">
+          <img src="/imagenes/logo_boe.png"  alt="Agencia Estatal Bolet&#xED;n Oficial del Estado">
+        </a>
+      </span>
+    </div> <!-- #cabecera -->
+    <!-- Cuerpo -->
+    <div id="cuerpo">
+      <div id="top" class="banda-menu">
+        <div id="menu_principal" class="menu-wrapper">
+          <ul>
+            <li class="inicio pc tablet">
+              <a href="https://subastas.boe.es/reg/index.php"><span>Inicio</span></a>
+            </li>
+            <li class="buscar">
+              <a href="https://subastas.boe.es/reg/subastas_ava.php">
+                <span class="pc tablet">Buscar</span>
+                <span class="movil"><img alt="Buscar" src="/imagenes/logoBuscar_blanco.png" srcset="/imagenes/logoBuscar_blanco.svg"></span>
+              </a>
+            </li>
+            <li class="ayuda">
+              <a href="https://subastas.boe.es/reg/ayuda.php">
+                <span class="pc tablet">Ayuda</span>
+                <span class="movil"><img alt="Ayuda" src="/imagenes/ayuda.png" srcset="/imagenes/ayuda.svg"></span>
+              </a>
+            </li>
+            <li class="botonAcceso_on ico_acceso">
+              <a href="https://subastas.boe.es/reg/misDatos.php">
+                <span class="pc tablet">
+                  Mi Perfil 
+                  <span class="luz">Conectado como:<br/>BEATRIZ NAVIDAD MELNIKAVA</span>
+                </span>
+                <span class="movil"><img alt="Mi Perfil" src="/imagenes/logoAcceso_on.png" srcset="/imagenes/logoAcceso_on.svg"></span>
+              </a>
+            </li>
+          </ul>
+        </div><!-- #menu_principal -->
+      </div><!-- .banda-menu -->
+      <p class="disclaimer">
+        <span id="fechaOficial">Lunes, 31 de agosto de 2026</span>
+        <span id="horaOficial">17:22:45</span>
+        <span id="usoHorario" title="Hora Central Europea / Central European Time">CET</span>
+      </p>
+      <script>
+         var hoy = new Date(2026,8-1,31,17,22,45); 
+         function reloj(){
+            var hora = hoy.getHours(); 
+            var minutos = hoy.getMinutes(); 
+            var segundos = hoy.getSeconds(); 
+            if (hora<=9) hora = "0" + hora; 
+            if (minutos<=9) minutos = "0" + minutos; 
+            if (segundos<=9) segundos = "0" + segundos; 
+            var horaFinal = hora + ":" + minutos + ":" + segundos; 
+            var dia = new Array('Domingo','Lunes','Martes','Mi&#xe9;rcoles','Jueves','Viernes','S&#xe1;bado'); 
+            var mes = new Array('Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'); 
+            var anio = hoy.getFullYear(); 
+            var fecha = dia[hoy.getDay()] + ', ' + hoy.getDate() + ' de '  + mes[hoy.getMonth()] + ' de ' + anio ; 
+
+            document.getElementById('fechaOficial').innerHTML = fecha;
+            document.getElementById('horaOficial').innerHTML = horaFinal;
+
+            hoy.setSeconds(hoy.getSeconds() +1);
+            setTimeout('reloj()',1000);
+         } 
+         reloj();
+      </script>
+      <div id="contenedor">
+        <div id="contenido">
+          <div class="desconectar">
+            <a href="https://subastas.boe.es/reg/desconectar.php">Desconectar <img alt="desconectar" src="/imagenes/logout.png" srcset="/imagenes/logout.svg"></a>
+          </div>
+          <h2>Subastas. Búsqueda avanzada</h2>
+          <div>
+            <ul class="navlist">
+              <li class="label"><a href="./subastas_ava.php?accion=&amp;id_busqueda=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,-0-50" >B&#xFA;squeda</a></li>
+              <li class="label"><a href="./subastas_ava.php?accion=Mas&amp;id_busqueda=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,-0-50" class="current">Resultados</a></li>
+              <li class="label"><a href="./subastas_ava.php?accion=Fav&amp;id_busqueda=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,-0-50" class="guardar">Guardar<span class="pc tablet"> b&#xFA;squeda</span><img src="/imagenes/logoMiBOE_on.png" srcset="/imagenes/logoMiBOE_on.svg" alt="Sesi&#xF3;n inactiva"/></a></li>
+            </ul>
+          </div>
+          <div class="paginar">
+            <p>Resultados 1 a 9 de 9</p>
+          </div>
+          <div class="paginar2">
+            <ul/>
+          </div>
+          <div class="listadoResult">
+            <ul>
+              <li class="resultado-busqueda">
+                <h3>SUBASTA SUB-JA-2026-265000 (2 lotes)</h3>
+                <h4>Sección Civil TI Eivissa. Plz.n 3 - IBIZA </h4>
+                <p>Expediente: 0429/24</p>
+                <p>Estado: Celebrándose - [Conclusión prevista: 14/09/2026 a las 18:00:00]</p>
+                <p>Subasta con varios lotes. Lote 1: SUBASTA VIVIENDA EN SANT JORDI (SAN JOSÉ). Lote 2: SUBASTA PLAZA APARCAMIENTO EN SANT JORDI (SAN JOSÉ). </p>
+                <a href="./detalleSubasta.php?idSub=SUB-JA-2026-265000&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-defecto" title="Subasta SUB-JA-2026-265000"> </a>
+                <ul>
+                  <li class="puntoHTML">
+                    <a href="./detalleSubasta.php?idSub=SUB-JA-2026-265000&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-otro" title="Subasta SUB-JA-2026-265000">Más... (Referencia SUB-JA-2026-265000)</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="resultado-busqueda">
+                <h3>SUBASTA SUB-JA-2026-262582</h3>
+                <h4>Sección Civil TI Eivissa. Plz.n 5 - IBIZA </h4>
+                <p>Expediente: 0276/23</p>
+                <p>Estado: Celebrándose - [Conclusión prevista: 07/09/2026 a las 18:00:00]</p>
+                <p>SUBASTA FINCA 14.339. VIVIENDA PLANTA QUINTO PISO, PUERTA SEGURNDA, QUE TIENE UNA SUPERFICIE DE NOVENTA Y OCHO METROS, CUARENTA Y CINCO DECIMOS CUADRADOS Y DOS TERRAZAS.  </p>
+                <a href="./detalleSubasta.php?idSub=SUB-JA-2026-262582&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-defecto" title="Subasta SUB-JA-2026-262582"> </a>
+                <ul>
+                  <li class="puntoHTML">
+                    <a href="./detalleSubasta.php?idSub=SUB-JA-2026-262582&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-otro" title="Subasta SUB-JA-2026-262582">Más... (Referencia SUB-JA-2026-262582)</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="resultado-busqueda">
+                <h3>SUBASTA SUB-JA-2026-264731</h3>
+                <h4>Sección Civil TI Palma. Plz.n 11 - PALMA DE MALLORCA </h4>
+                <p>Expediente: 0123/20</p>
+                <p>Estado: Celebrándose - [Conclusión prevista: 07/09/2026 a las 18:00:00]</p>
+                <p>NUMERO DIECISEIS DE ORDEN. consistente en fa vivienda puerta segunda o centro
+          de 1a planta de piso tercero tipo B-Dos con acceso por el por:tal, escalera y
+          ascensor número 5, antes 11, de 1a calfe obispo Mauraa, de esta ciridad. Mide en
+          superficie construida ciento treinta y dos metros y setenta y tres decímetros
+          cuadrados y en superficie útil ciento diez y seis netros cualenta y seis decímetros
+          cuadrados. l,inda: al frente, con 1a ca1le Obispo Maura; derecha, con Ia de Viñaza
+          con la que forma chaflán; por fondo, con la vivienda puerta te¡cera o izqlrierda del
+          mismo relfano, patio interior de luces y hueco de 1a escalera; partes superior e
+          inferior, con fas respectivas viviendas centro de piso cuarto y segundo. Le
+          corresponde en la comunidad una cuota del 3,38 por' ciento </p>
+                <a href="./detalleSubasta.php?idSub=SUB-JA-2026-264731&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-defecto" title="Subasta SUB-JA-2026-264731"> </a>
+                <ul>
+                  <li class="puntoHTML">
+                    <a href="./detalleSubasta.php?idSub=SUB-JA-2026-264731&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-otro" title="Subasta SUB-JA-2026-264731">Más... (Referencia SUB-JA-2026-264731)</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="resultado-busqueda">
+                <h3>SUBASTA SUB-JA-2026-263775</h3>
+                <h4>Sección Civil TI Palma. Plz.n 8 - PALMA DE MALLORCA </h4>
+                <p>Expediente: 0316/22</p>
+                <p>Estado: Celebrándose - [Conclusión prevista: 03/09/2026 a las 16:27:16]</p>
+                <p>URBANA. - NUMERO TRECE DE ORDEN. - Vivienda tipo dúplex, señalada con la letra A en el plano, que se desarrolla en planta baja y planta piso primero, comunicadas dichas plantas entre si a través de escalera interior. Forma parte del edificio 2, situado en la calle Sant Lluc, número cuatro, urbanización Sa Torre, término de Llucmajor. La planta baja, ocupa una superficie total construida de unos 57,33 metros cuadrados y tiene además otros 3,25 metros cuadrados de porche. Y en planta piso primero, ocupa una superficie total construida de unos 60,73 metros cuadrados. Y mirando desde la zona de acceso, LINDA TODO: por Frente, con jardín privativo de esta vivienda, que limita con dicha zona; por la Derecha, con aparcamiento y terraza de uso privativo de esta vivienda, que limita con calle Sant Lluc; por la Izquierda, con vivienda dúplex del mismo bloque 2 y señalada con la letra B en el plano; y por Fondo, con terraza-jardín de uso privativo de esta vivienda, que limita con zona de paso comunitario. 
+          
+           </p>
+                <a href="./detalleSubasta.php?idSub=SUB-JA-2026-263775&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-defecto" title="Subasta SUB-JA-2026-263775"> </a>
+                <ul>
+                  <li class="puntoHTML">
+                    <a href="./detalleSubasta.php?idSub=SUB-JA-2026-263775&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-otro" title="Subasta SUB-JA-2026-263775">Más... (Referencia SUB-JA-2026-263775)</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="resultado-busqueda">
+                <h3>SUBASTA SUB-JA-2026-264170</h3>
+                <h4>Sección Civil TI Palma. Plz.n 22 - PALMA DE MALLORCA </h4>
+                <p>Expediente: 0279/25</p>
+                <p>Estado: Celebrándose - [Conclusión prevista: 01/09/2026 a las 18:00:00]</p>
+                <p>URBANA: NUMERO SIETE DE ORDEN.- VIVIENDA del piso tercero, que tiene su acceso por el zaguán señalado hoy con el número 124 de la calle Regalo de esta ciudad. Mide una superficie útil de SETENTA METROS CUADRADOS y mirándola desde la citada calle, limita: al frente, con el vuelo de la misma; por la derecha, con propiedad de Miguel Fiol; por la izquierda, con rellano y caja de escalera y la vivienda e la misma planta número ocho de orden; por fondo, con el vacío del corral de la vivienda planta baja número uno de orden; por la parte superior, con terrado y por la parte inferior, con la vivienda del piso segundo, cinco de orden. A la finca de este número le corresponde exclusivamente el uso del lavadero letra b de los existentes en el terrado. Su cuota es de once centésimas. </p>
+                <a href="./detalleSubasta.php?idSub=SUB-JA-2026-264170&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-defecto" title="Subasta SUB-JA-2026-264170"> </a>
+                <ul>
+                  <li class="puntoHTML">
+                    <a href="./detalleSubasta.php?idSub=SUB-JA-2026-264170&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-otro" title="Subasta SUB-JA-2026-264170">Más... (Referencia SUB-JA-2026-264170)</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="resultado-busqueda">
+                <h3>SUBASTA SUB-RC-2026-07003001801</h3>
+                <h4>Agencia Tributaria de las Islas Baleares - PALMA (Agencia Tributaria Islas Baleares)</h4>
+                <p>Estado: Celebrándose - [Conclusión prevista: 31/08/2026 a las 18:12:54]</p>
+                <p>URBANA.- NUMERO .DIECINUEVE DE ORDEN.- Vivienda puerta tercera, Tipo A—cuatro, de la planta de piso cuarto, con acceso por la calle San José de la Montaña. Mide CIENTO TREINTA Y TRES PIETROS OCHO DECIMETROS CUADRADOS. Tiene una cuota del 3,036 por ciento. </p>
+                <a href="./detalleSubasta.php?idSub=SUB-RC-2026-07003001801&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-defecto" title="Subasta SUB-RC-2026-07003001801"> </a>
+                <ul>
+                  <li class="puntoHTML">
+                    <a href="./detalleSubasta.php?idSub=SUB-RC-2026-07003001801&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-otro" title="Subasta SUB-RC-2026-07003001801">Más... (Referencia SUB-RC-2026-07003001801)</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="resultado-busqueda">
+                <h3>SUBASTA SUB-AT-2026-26R0886001200</h3>
+                <h4>U.R. SUBASTAS CATALUÑA - BARCELONA (AEAT)</h4>
+                <p>Estado: Celebrándose - [Conclusión prevista: 31/08/2026 a las 18:00:00]</p>
+                <p>50% PLENO DOMINIO VIVIENDA CL MAGALLANES 46 00 03. CAPDEPERA (MALLORCA) </p>
+                <a href="./detalleSubasta.php?idSub=SUB-AT-2026-26R0886001200&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-defecto" title="Subasta SUB-AT-2026-26R0886001200"> </a>
+                <ul>
+                  <li class="puntoHTML">
+                    <a href="./detalleSubasta.php?idSub=SUB-AT-2026-26R0886001200&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-otro" title="Subasta SUB-AT-2026-26R0886001200">Más... (Referencia SUB-AT-2026-26R0886001200)</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="resultado-busqueda">
+                <h3>SUBASTA SUB-JA-2026-265003 (3 lotes)</h3>
+                <h4>Sección Civil TI Palma. Plz.n 6 - PALMA DE MALLORCA </h4>
+                <p>Expediente: 0262/17</p>
+                <p>Estado: Celebrándose - [Conclusión prevista: 31/08/2026 a las 18:00:00]</p>
+                <p>Subasta con varios lotes. Lote 1: “URBANA.- DEPARTAMENTO NÚMERO ONCE DE ORDEN. Espacio de
+          aparcamiento para coche, nº 7, en la planta sótano, con acceso rodado desde el carrer de
+          Maria Antònia Salvà, mediante rampa y la correspondiente zona de circulación y maniobras,
+          en es Pont d´Inca, Marratxí. Tiene una superficie útil de 10,50 m2. LINDA, mirando desde su
+          acceso particular: al frente con el mismo, a la derecha entrando con el aparcamiento nº 6, a la
+          izquierda con el nº 8 y al fondo con muro de la edificación. Lote 2: URBANA.- DEPARTAMENTO NÚMERO DOCE DE ORDEN. Espacio de
+          aparcamiento para coche, nº 8, en la planta sótano, con acceso rodado desde el carrer de
+          Maria Antònia Salvà, mediante rampa y la correspondiente zona de circulación y maniobras,
+          en es Pont d´Inca, Marratxí. Tiene una superficie útil de 9,46 m2. LINDA, mirando desde su
+          acceso particular: al frente con el mismo, a la derecha entrando con el aparcamiento nº 7, a la
+          izquierda con el nº 9 y al fondo con muro de la edificación Lote 3: URBANA.- DEPARTAMENTO NÚMERO TRECE DE ORDEN. Espacio de
+          aparcamiento para motos, nº 10, en la planta sótano, con acceso rodado desde el carrer de
+          Maria Antònia Salvà, mediante rampa y la correspondiente zona de circulación y maniobras,
+          en es Pont d´Inca, Marratxí. Tiene una superficie útil de 9,46 m2. LINDA, mirando desde su
+          acceso particular: al frente con el mismo, a la derecha entrando con rampa de acceso a la
+          planta, a la izquierda con el aparcamiento nº 11 y al fondo con zona libre </p>
+                <a href="./detalleSubasta.php?idSub=SUB-JA-2026-265003&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-defecto" title="Subasta SUB-JA-2026-265003"> </a>
+                <ul>
+                  <li class="puntoHTML">
+                    <a href="./detalleSubasta.php?idSub=SUB-JA-2026-265003&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-otro" title="Subasta SUB-JA-2026-265003">Más... (Referencia SUB-JA-2026-265003)</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="resultado-busqueda">
+                <h3>SUBASTA SUB-RC-2026-07003001815</h3>
+                <h4>Agencia Tributaria de las Islas Baleares - PALMA (Agencia Tributaria Islas Baleares)</h4>
+                <p>Estado: Celebrándose - [Conclusión prevista: 31/08/2026 a las 18:00:00]</p>
+                <p>URBANA.- NÚMERO QUINCE DE ORDEN.- Espacio de aparcamiento para motos, señalado con el número 15 de la planta de sótano primero, de un edificio marcado con el número 96 de la calle del Archiduque Luis Salvador, de esta ciudad. Mide tres con cincuenta metros cuadrados útiles. Mirando desde dicha calle, linda: frente, aparcamiento número 16 y zona de acceso; derecha, con dicha zona; izquierda, subsuelo de la calle Músico Balaguer; fondo, subsuelo de la finca de Francisco Aguiló. </p>
+                <a href="./detalleSubasta.php?idSub=SUB-RC-2026-07003001815&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-defecto" title="Subasta SUB-RC-2026-07003001815"> </a>
+                <ul>
+                  <li class="puntoHTML">
+                    <a href="./detalleSubasta.php?idSub=SUB-RC-2026-07003001815&amp;idBus=cmN4VGgycVZtckZ2NG9jRk1pNGptTVJXMDJjYndPVDZmeW9pSDRQSWxLcHJHRytJZS94SEdoL1RlV0ZUa3dxNDJhM0M4bnhuOTN6bFVNeWxaOU9OOGVxNlZSTWNrb2hHYUJDN2trWlR1Qmx2OSs3Q2IzY2cxNWh0bnpYRGZhUXVRSjllUXpZdGxXeEFOYWo0QjBCM3ZqWFBTL2tLZUh4d1hjY25yNjBwMGp3NWR3emRiZEp4TjV3ZzYvSUdwaUNmZHdscG5DbFdLL3JpaHM5THU5ZGxJTmRPOUI2Z3JmdjU3aEtFZ0I0czJKV1RXb0JVaUVMN0EzNXI2UmFtTVJwTDBsdGJLQlFnYm5CSzV2MU5Sc1FZbzk5UFUybFB3ZnhRQWk0OFFSVVErSDF5ZkNXcCtNQ052MTBSWU9KVFgrSlYzbVFrSWxCU0xiOWhiNXh4YTdTRVRVYWdHZFJPazUxS0NpdnFhVjdLN2RjPQ,,--50" class="resultado-busqueda-link-otro" title="Subasta SUB-RC-2026-07003001815">Más... (Referencia SUB-RC-2026-07003001815)</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="paginar">
+            <p class="linkSubir">
+              <a href="#top">subir</a>
+            </p>
+          </div>
+          <div class="paginar2">
+            <ul/>
+          </div>
+        </div> <!-- /contenido -->
+      </div> <!-- /contenedor -->
+    </div> <!-- #cuerpo -->
+    <div id="pie">
+      <div id="menuPie">
+        <div class="franjaMenu">
+          <ul>
+            <li><a href="https://subastas.boe.es/textoPolitica.php" target="_blank" title="Abre nueva ventana">Acerca del Portal</a></li>
+          </ul>
+        </div> <!-- .franjaMenu -->
+      </div> <!-- #menuPie -->
+      <div class="franja-pie">
+        <p>Agencia Estatal Bolet&#xED;n Oficial del Estado</p>
+        <p><abbr title="Avenida">Avda.</abbr> de Manoteras, 54 - 28050 Madrid</p>
+      </div>
+    </div> <!-- #pie -->
+    <script src="/lib/js/desplegable.js"></script>
+  </body>
+</html>
