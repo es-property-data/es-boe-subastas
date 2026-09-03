@@ -18,28 +18,28 @@ concurrency:
 
 jobs:
   canary:
-    name: Recolección real contra el portal
+    name: Live run against the portal
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
       # Subastas concluidas: permanecen en el portal y su estructura es estable.
       KNOWN_IDS: SUB-JA-2026-265003 SUB-RC-2026-07003001815
     steps:
-      - name: Descargar el repositorio
-        uses: actions/checkout@v4
+      - name: Check out the repository
+        uses: actions/checkout@v5
 
-      - name: Preparar Python
-        uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
 
-      - name: Instalar el recolector
+      - name: Install the collector
         run: |
           python -m pip install --upgrade pip
           python -m pip install -e ".[dev]"
 
-      - name: Recuperar el caso conocido (fetch)
+      - name: Fetch the known case
         id: fetch
         run: |
           set +e
@@ -47,7 +47,7 @@ jobs:
           echo "exit=$?" >> "$GITHUB_OUTPUT"
           cat canary-fetch.log
 
-      - name: Buscar en la fuente (search)
+      - name: Search the source
         id: search
         run: |
           set +e
@@ -55,16 +55,16 @@ jobs:
           echo "exit=$?" >> "$GITHUB_OUTPUT"
           cat canary-search.log
 
-      - name: Validar la salida contra el esquema
+      - name: Validate the output against the schema
         id: validate
         run: |
           set +e
           python scripts/validate_output.py canary-fetch.jsonl canary-search.jsonl
           echo "exit=$?" >> "$GITHUB_OUTPUT"
 
-      - name: Guardar salida y registros como artefacto
+      - name: Upload output and logs as an artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: canary-${{ github.run_number }}
           path: |
@@ -73,7 +73,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 30
 
-      - name: Abrir o actualizar la incidencia
+      - name: Open or update the issue
         if: steps.fetch.outputs.exit == '4' || steps.search.outputs.exit == '4' || steps.validate.outputs.exit != '0'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -82,17 +82,17 @@ jobs:
           SEARCH_EXIT: ${{ steps.search.outputs.exit }}
           VALIDATE_EXIT: ${{ steps.validate.outputs.exit }}
         run: |
-          gh label create canary --description "Aviso del canary semanal" --color D93F0B --force > /dev/null 2>&1 || true
-          title="Canary: el recolector ya no interpreta bien el portal"
+          gh label create canary --description "Weekly canary alert" --color D93F0B --force > /dev/null 2>&1 || true
+          title="Canary: the collector no longer parses the portal correctly"
           {
-            echo "El canary ha detectado un problema en la ejecucion $RUN_URL"
+            echo "The weekly canary found a problem in run $RUN_URL"
             echo
-            echo "- fetch de $KNOWN_IDS: codigo de salida $FETCH_EXIT"
-            echo "- search --province 07 --limit 3: codigo de salida $SEARCH_EXIT"
-            echo "- validacion contra schemas/item.schema.json: codigo de salida $VALIDATE_EXIT"
+            echo "- fetch of $KNOWN_IDS: exit code $FETCH_EXIT"
+            echo "- search --province 07 --limit 3: exit code $SEARCH_EXIT"
+            echo "- validation against schemas/item.schema.json: exit code $VALIDATE_EXIT"
             echo
-            echo "El codigo 4 significa que el portal ha cambiado su estructura y el parser necesita mantenimiento."
-            echo "La salida y los registros estan en los artefactos de la ejecucion."
+            echo "Exit code 4 means the portal changed its structure and the parser needs maintenance."
+            echo "The output files and logs are attached to the run as artifacts."
           } > issue-body.md
           number=$(gh issue list --label canary --state open --json number --jq '.[0].number // empty')
           if [ -n "$number" ]; then
@@ -101,12 +101,12 @@ jobs:
             gh issue create --title "$title" --label canary --body-file issue-body.md
           fi
 
-      - name: Resultado
+      - name: Report the result
         if: always()
         env:
           FETCH_EXIT: ${{ steps.fetch.outputs.exit }}
           SEARCH_EXIT: ${{ steps.search.outputs.exit }}
           VALIDATE_EXIT: ${{ steps.validate.outputs.exit }}
         run: |
-          echo "fetch=$FETCH_EXIT search=$SEARCH_EXIT validacion=$VALIDATE_EXIT"
+          echo "fetch=$FETCH_EXIT search=$SEARCH_EXIT validation=$VALIDATE_EXIT"
           [ "$FETCH_EXIT" = "0" ] && [ "$SEARCH_EXIT" = "0" ] && [ "$VALIDATE_EXIT" = "0" ]
