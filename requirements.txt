@@ -1,0 +1,9 @@
+requests
+beautifulsoup4
+lxml
+selenium
+python-dotenv
+
+# Development dependencies
+pytest
+jsonschema
