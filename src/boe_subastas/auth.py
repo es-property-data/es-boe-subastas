@@ -4,8 +4,8 @@ El portal exige usuario registrado para ver el importe de las pujas de las
 subastas en curso. El acceso con usuario y contraseña añade un segundo paso:
 un código de verificación que el portal envía por correo electrónico. Ese
 paso se resuelve con Selenium (navegador real) pidiendo el código por la
-terminal (stderr/stdin), y las cookies resultantes se trasladan a la sesión
-de `requests`, que es la que scrapea. Las cookies se persisten en disco para
+terminal de control (Linux, macOS y Windows), y las cookies resultantes se
+trasladan a la sesión de `requests`, que es la que scrapea. Las cookies se persisten en disco para
 reutilizar la sesión entre ejecuciones sin repetir el login.
 
 Variables de entorno (véase .env.example):
@@ -39,17 +39,33 @@ _ERROR_MARKERS = ("incorrect", "bloquead", "no es válido", "erróne")
 _LOGIN_TIMEOUT_SECONDS = 300
 
 
+def _config_dir() -> Path:
+    """Carpeta de configuración del usuario según la plataforma.
+
+    Windows: %APPDATA%\\boe-subastas. Linux/macOS: $XDG_CONFIG_HOME/boe-subastas
+    o, en su defecto, ~/.config/boe-subastas.
+    """
+    if sys.platform == "win32":
+        base = os.environ.get("APPDATA")
+        root = Path(base) if base else Path.home() / "AppData" / "Roaming"
+    else:
+        base = os.environ.get("XDG_CONFIG_HOME")
+        root = Path(base) if base else Path.home() / ".config"
+    return root / "boe-subastas"
+
+
 def default_session_file() -> Path:
     configured = os.environ.get("BOE_SUBASTAS_SESSION_FILE")
     if configured:
         return Path(configured).expanduser()
-    return Path.home() / ".config" / "boe-subastas" / "session.json"
+    return _config_dir() / "session.json"
 
 
 def save_cookies(path: Path, cookies: list[dict]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     # Permisos restrictivos desde la creación: las cookies equivalen a la
-    # sesión de la cuenta del portal.
+    # sesión de la cuenta del portal. En Windows la protección la da la carpeta
+    # del perfil de usuario (%APPDATA%).
     descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
     with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
         json.dump(cookies, handle, ensure_ascii=False, indent=2)
@@ -86,6 +102,29 @@ def session_is_connected(session: requests.Session) -> bool:
     return any(marker in response.text for marker in _SESSION_MARKERS[:1])
 
 
+# Dispositivo de la terminal de control.
+_CONSOLE_DEVICE = "CON" if sys.platform == "win32" else "/dev/tty"
+
+
+def _read_line_from_console() -> str:
+    """Lee una línea de la terminal de control, nunca de una tubería.
+
+    Si no hay dispositivo de consola disponible, acepta stdin solo cuando es
+    una terminal interactiva; en una tubería falla en alto.
+    """
+    try:
+        with open(_CONSOLE_DEVICE) as console:
+            return console.readline().strip()
+    except OSError as exc:
+        if sys.stdin.isatty():
+            return sys.stdin.readline().strip()
+        raise AuthenticationError(
+            "No hay terminal interactiva para introducir el código de "
+            "verificación. Ejecute una vez el login de forma interactiva para "
+            "guardar la sesión y reutilizarla después."
+        ) from exc
+
+
 def _ask_code_on_terminal() -> str:
     # Se lee de la terminal de control, nunca de stdin: en una tubería
     # («cat ids | xargs boe-subastas fetch --auth») stdin lleva datos ajenos
@@ -97,15 +136,7 @@ def _ask_code_on_terminal() -> str:
         file=sys.stderr,
         flush=True,
     )
-    try:
-        with open("/dev/tty", encoding="utf-8") as terminal:
-            code = terminal.readline().strip()
-    except OSError as exc:
-        raise AuthenticationError(
-            "No hay terminal interactiva para introducir el código de "
-            "verificación. Ejecute una vez el login de forma interactiva para "
-            "guardar la sesión y reutilizarla después."
-        ) from exc
+    code = _read_line_from_console()
     if not code:
         raise AuthenticationError("No se introdujo ningún código de verificación.")
     return code

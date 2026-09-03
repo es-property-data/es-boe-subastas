@@ -19,7 +19,24 @@ from typing import Callable, TextIO
 
 # Color (solo si stdout es una terminal)
 
-_COLOR = sys.stdout.isatty() and not os.environ.get("NO_COLOR")
+def _enable_ansi() -> bool:
+    """Activa las secuencias ANSI en la consola clásica de Windows."""
+    if sys.platform != "win32":
+        return True
+    try:
+        import ctypes
+
+        kernel32 = ctypes.windll.kernel32  # type: ignore[attr-defined]
+        handle = kernel32.GetStdHandle(-11)  # STD_OUTPUT_HANDLE
+        mode = ctypes.c_uint32()
+        if not kernel32.GetConsoleMode(handle, ctypes.byref(mode)):
+            return False
+        return bool(kernel32.SetConsoleMode(handle, mode.value | 0x0004))  # VT
+    except (AttributeError, OSError):
+        return False
+
+
+_COLOR = sys.stdout.isatty() and not os.environ.get("NO_COLOR") and _enable_ansi()
 
 
 def _style(text: str, code: str) -> str:
