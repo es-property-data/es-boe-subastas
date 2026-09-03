@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import json
 import logging
-import sys
 from pathlib import Path
 
 import jsonschema
@@ -19,10 +18,6 @@ REPO = Path(__file__).resolve().parents[1]
 FIXTURES = REPO / "tests" / "fixtures"
 SCHEMA_PATH = REPO / "schemas" / "item.schema.json"
 SCRIPTS = REPO / "scripts"
-
-# Los scripts de exploración se importan como módulos sueltos (p. ej. `_format`).
-if str(SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(SCRIPTS))
 
 # Subastas con captura completa (todas las pestañas) y lo que se sabe de ellas
 # por el listado del buscador.

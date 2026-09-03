@@ -54,7 +54,7 @@ como datos estructurados en formato JSON Lines, listos para procesar.
 
 Dependencias Python (se instalan solas): `requests`, `beautifulsoup4`,
 `lxml`, `selenium`, `python-dotenv`; para desarrollo, `pytest` y
-`jsonschema`. La lista informativa está en [requirements.txt](requirements.txt)
+`jsonschema`; para el notebook de exploración, `pandas` y `notebook`. La lista informativa está en [requirements.txt](requirements.txt)
 y la declaración canónica en [pyproject.toml](pyproject.toml).
 
 ## Instalación
@@ -104,6 +104,14 @@ Con las herramientas de desarrollo (tests y validación del esquema):
 pip install -e ".[dev]"
 ```
 
+Con el notebook de exploración (Jupyter y pandas):
+
+```bash
+pip install -e ".[notebook]"
+```
+
+Los grupos se combinan: `pip install -e ".[dev,notebook]"`.
+
 ### 4. Comprobar la instalación
 
 ```bash
@@ -133,7 +141,6 @@ entorno, que puede leer de un fichero `.env` en la carpeta del proyecto: copia
 | `BOE_SUBASTAS_PASSWORD` | con `--auth` | Contraseña del usuario. |
 | `BOE_SUBASTAS_SESSION_FILE` | no | Ruta del fichero de sesión. Por defecto `~/.config/boe-subastas/session.json` (Linux y macOS) o `%APPDATA%\boe-subastas\session.json` (Windows). |
 | `BOE_SUBASTAS_HEADLESS` | no | `0` para ver el navegador durante el inicio de sesión; por defecto oculto. |
-| `NO_COLOR` | no | Desactiva los colores en los scripts de exploración. |
 
 Nunca escribas las credenciales en la línea de órdenes ni las subas al
 repositorio: `.env` está en `.gitignore`.
@@ -235,24 +242,24 @@ basta ejecutar una vez de forma interactiva para renovarla.
 Cada sobre se emite en cuanto está listo (streaming) y valida contra
 [schemas/item.schema.json](schemas/item.schema.json).
 
-### Scripts de exploración
+### Notebook de exploración
 
-En [scripts/](scripts) hay utilidades para explorar subastas a mano, con
-salida pensada para personas; los datos crudos siguen disponibles con
-`--save`.
+Para ver los datos de forma visual hay un cuaderno Jupyter en
+[notebooks/explore_auctions.ipynb](notebooks/explore_auctions.ipynb), guardado
+con sus resultados para poder leerlo directamente en GitHub. Busca las
+subastas de una provincia, las presenta con `pandas` (tabla resumen, recuento
+por estado, ficha de una subasta pestaña a pestaña) y guarda el resultado en
+JSONL y CSV. Los parámetros (provincia, estado, tipo de bien, límite, sesión
+registrada) se cambian en la primera celda.
 
 ```bash
-# Listado legible; al cerrar cada bloque de estado indica cuántas subastas había
-python scripts/search_auctions.py --province "Illes Balears" --limit 10
+pip install -e ".[notebook]"
+jupyter notebook notebooks/explore_auctions.ipynb
 ```
 
-```bash
-# Ficha completa y legible de una subasta (o de un JSONL ya guardado, con --file)
-python scripts/view_auction.py SUB-JA-2026-265000
-```
+Para validar cualquier fichero de salida contra el esquema:
 
 ```bash
-# Validar un fichero de salida contra el esquema
 python scripts/validate_output.py baleares.jsonl
 ```
 
